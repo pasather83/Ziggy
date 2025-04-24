@@ -1,120 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Hotel Indigo Chatbot</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Montserrat', sans-serif;
-      background: linear-gradient(135deg, #1e3c72, #2a5298);
-      color: #fff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      background-size: cover;
-      background-position: center;
-    }
-
-    .chat-container {
-      background-color: rgba(255, 255, 255, 0.9);
-      border-radius: 15px;
-      width: 400px;
-      max-width: 90%;
-      padding: 20px;
-      box-shadow: 0 8px 16px rgba(0,0,0,0.3);
-      color: #333;
-    }
-
-    .chat-header {
-      font-size: 1.5em;
-      font-weight: 700;
-      margin-bottom: 10px;
-      text-align: center;
-      color: #1e3c72;
-    }
-
-    .chat-box {
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      padding: 10px;
-      height: 300px;
-      overflow-y: auto;
-      background-color: #f9f9f9;
-      margin-bottom: 10px;
-    }
-
-    .chat-input {
-      display: flex;
-    }
-
-    .chat-input input {
-      flex: 1;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 10px 0 0 10px;
-      outline: none;
-    }
-
-    .chat-input button {
-      padding: 10px 20px;
-      border: none;
-      background-color: #1e3c72;
-      color: #fff;
-      border-radius: 0 10px 10px 0;
-      cursor: pointer;
-    }
-
-    .chat-message {
-      margin: 5px 0;
-    }
-
-    .user-message {
-      text-align: right;
-      color: #1e3c72;
-    }
-
-    .bot-message {
-      text-align: left;
-      color: #2a5298;
-    }
-  </style>
-</head>
-<body>
-  <div class="chat-container">
-    <div class="chat-header">Hotel Indigo Assistant</div>
-    <div class="chat-box" id="chat-box">
-      <div class="chat-message bot-message">Hello! How can I assist you today?</div>
-    </div>
-    <div class="chat-input">
-      <input type="text" id="user-input" placeholder="Type your message here..." />
-      <button onclick="sendMessage()">Send</button>
-    </div>
-  </div>
-
-  <script>
-    function sendMessage() {
-      const userInput = document.getElementById('user-input');
-      const chatBox = document.getElementById('chat-box');
-      const userMessage = userInput.value.trim();
-      if (userMessage === '') return;
-
-      const userMessageDiv = document.createElement('div');
-      userMessageDiv.className = 'chat-message user-message';
-      userMessageDiv.textContent = userMessage;
-      chatBox.appendChild(userMessageDiv);
-
-      const botMessageDiv = document.createElement('div');
-      botMessageDiv.className = 'chat-message bot-message';
-      botMessageDiv.textContent = "I'm here to help with your inquiries about Hotel Indigo Dubai Downtown.";
-      chatBox.appendChild(botMessageDiv);
-
-      chatBox.scrollTop = chatBox.scrollHeight;
-      userInput.value = '';
-    }
-  </script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ziggy – Hotel Indigo Chatbot</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>
