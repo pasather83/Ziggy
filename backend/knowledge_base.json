@@ -1,6 +1,13 @@
 {
   "faq": {
-    "checkin_time": "Check-in is from 3:00 PM",
-    "checkout_time": "Checkout is until 12:00 PM"
+    "checkin_time": "Check-in is from 3:00 PM.",
+    "checkout_time": "Check-out is at 12:00 PM.",
+    "pool_hours": "The pool is open from 7 AM to 8 PM.",
+    "restaurant": "Open Sesame serves Mediterranean cuisine until 11:30 PM.",
+    "gym": "The gym is open 24/7 and includes free weights and machines.",
+    "spa": "Wellbeings Spa is open from 10 AM to 10 PM. Appointments recommended.",
+    "wifi": "Wi-Fi is complimentary throughout the hotel. Connect to 'Indigo_Guest'.",
+    "pets": "Yes, we are pet-friendly! Please inform reception if you're bringing a pet.",
+    "location": "We're located on Marasi Drive, Business Bay – near Dubai Mall and Design District."
   }
 }
