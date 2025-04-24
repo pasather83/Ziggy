@@ -1,0 +1,1 @@
+// React chat widget component
