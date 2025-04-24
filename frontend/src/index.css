@@ -1,0 +1,17 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f4f8;
+    margin: 0;
+    padding: 0;
+  }
+  
+  input:focus,
+  button:focus {
+    outline: none;
+  }
+  
+  button {
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+  }
+  
