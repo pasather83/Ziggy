@@ -1,0 +1,7 @@
+node_modules
+.git
+.gitignore
+README.md
+tailwind.config.js
+postcss.config.js
+*.log
