@@ -1,26 +1,29 @@
-import React, { useState } from 'react';
-import './index.css';
+import React, { useState, useEffect } from 'react';
 
 function App() {
   const [question, setQuestion] = useState('');
   const [response, setResponse] = useState('');
 
-  const askZiggy = async () => {
+  useEffect(() => {
     try {
-      const res = await fetch('http://localhost:5000/ask', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ question }),
-      });
-
-      const data = await res.json();
-      setResponse(data.answer);
-    } catch (error) {
-      console.error('Error talking to Ziggy:', error);
-      setResponse("Ziggy's having a nap. Try again later.");
+      localStorage.setItem("__ziggy_test__", "true");
+      localStorage.removeItem("__ziggy_test__");
+    } catch (err) {
+      console.warn("Ziggy can’t access localStorage in this environment. All good though!");
     }
+  }, []);
+
+  const askZiggy = async () => {
+    const res = await fetch('http://localhost:5000/ask', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ question }),
+    });
+
+    const data = await res.json();
+    setResponse(data.answer);
   };
 
   return (
