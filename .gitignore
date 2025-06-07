@@ -21,3 +21,6 @@ yarn-error.log*
 
 # system
 Thumbs.db
+
+# Python cache
+__pycache__/
