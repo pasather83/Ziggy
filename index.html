@@ -1,12 +1,160 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ziggy – Hotel Indigo Chatbot</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ziggy | Hotel Indigo Dubai Staff Assistant</title>
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
+    <main class="app-shell">
+      <aside class="rail" aria-label="Ziggy navigation">
+        <div class="brand-mark" aria-label="Ziggy">Z</div>
+        <button class="rail-button active" type="button" data-tooltip="Chat" aria-label="Chat">
+          <span class="icon chat-icon"></span>
+        </button>
+        <button class="rail-button" type="button" data-tooltip="Handover" aria-label="Handover">
+          <span class="icon note-icon"></span>
+        </button>
+        <button class="rail-button" type="button" data-tooltip="Service" aria-label="Service">
+          <span class="icon service-icon"></span>
+        </button>
+        <button class="rail-button" type="button" data-tooltip="Alerts" aria-label="Alerts">
+          <span class="icon alert-icon"></span>
+        </button>
+      </aside>
+
+      <section class="workspace">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Hotel Indigo Dubai Downtown</p>
+            <h1>Ziggy</h1>
+          </div>
+          <div class="status-cluster" aria-label="Assistant status">
+            <span class="status-dot"></span>
+            <span>Ready for the next guest moment</span>
+          </div>
+        </header>
+
+        <section class="content-grid">
+          <section class="chat-panel" aria-label="Ziggy chat">
+            <div class="chat-header">
+              <div>
+                <h2>Staff Chat</h2>
+                <p>Ask Ziggy for guest answers, SOP reminders, handover wording, or escalation help.</p>
+              </div>
+              <button id="clearChat" class="clear-chat-button" type="button" aria-label="Clear chat">
+                <span class="icon clear-icon"></span>
+                <span>Clear chat</span>
+              </button>
+            </div>
+
+            <div id="messages" class="messages" aria-live="polite"></div>
+
+            <div class="prompt-dock" aria-label="Quick prompts">
+              <div class="prompt-tabs" role="tablist" aria-label="Shortcut categories">
+                <button class="active" type="button" data-prompt-category="guest">Guest</button>
+                <button type="button" data-prompt-category="sop">SOP</button>
+                <button type="button" data-prompt-category="ops">Ops</button>
+              </div>
+              <div id="promptButtons" class="prompt-buttons" aria-live="polite"></div>
+            </div>
+
+            <form id="chatForm" class="composer">
+              <label class="sr-only" for="chatInput">Message Ziggy</label>
+              <textarea id="chatInput" rows="2" placeholder="Ask Ziggy anything staff need help with..." required></textarea>
+              <button class="send-button" type="submit" aria-label="Send message">
+                <span class="icon send-icon"></span>
+              </button>
+            </form>
+          </section>
+
+          <aside class="ops-panel" aria-label="Operations tools">
+            <section class="tool-block">
+              <div class="block-heading">
+                <h2>Shift Tools</h2>
+                <span id="localTime">--:--</span>
+              </div>
+
+              <div class="workbench" aria-label="Shift workbench">
+                <div class="tool-tabs" role="tablist" aria-label="Shift tool modes">
+                  <button class="active" type="button" data-tool-mode="handover">Handover</button>
+                  <button type="button" data-tool-mode="recovery">Recovery</button>
+                  <button type="button" data-tool-mode="sop">SOP</button>
+                  <button type="button" data-tool-mode="product">Product</button>
+                </div>
+
+                <label class="field-label" for="toolSubject">Guest / room / topic</label>
+                <input id="toolSubject" class="tool-input" type="text" placeholder="Room 704, Mr Ahmed, pool pass..." />
+
+                <label class="field-label" for="toolSituation">What's happening?</label>
+                <textarea id="toolSituation" class="tool-textarea" rows="4" placeholder="Drop the rough facts here. Ziggy will clean it up."></textarea>
+
+                <div class="tool-grid">
+                  <label>
+                    <span>Urgency</span>
+                    <select id="toolUrgency" class="tool-select">
+                      <option>Same shift</option>
+                      <option>Urgent</option>
+                      <option>Handover</option>
+                      <option>FYI</option>
+                    </select>
+                  </label>
+                  <label>
+                    <span>Owner</span>
+                    <select id="toolOwner" class="tool-select">
+                      <option>Front Office</option>
+                      <option>Duty Manager</option>
+                      <option>Housekeeping</option>
+                      <option>Engineering</option>
+                      <option>F&amp;B</option>
+                      <option>HR</option>
+                    </select>
+                  </label>
+                </div>
+
+                <div id="toolHint" class="tool-hint">Best for clean end-of-shift notes with owner, promise, and next action.</div>
+
+                <div id="toolOutput" class="tool-output" aria-live="polite">Pick a mode, add the rough facts, then build the note.</div>
+
+                <div class="tool-actions">
+                  <button id="buildToolOutput" class="primary-tool-button" type="button">Build</button>
+                  <button id="sendToolOutput" type="button">Send to chat</button>
+                  <button id="copyToolOutput" type="button">Copy</button>
+                </div>
+              </div>
+            </section>
+
+            <section class="tool-block">
+              <div class="block-heading">
+                <h2>Knowledge Library</h2>
+                <span>Guest + SOP</span>
+              </div>
+              <div id="knowledgeList" class="knowledge-list"></div>
+            </section>
+
+            <section class="tool-block compact">
+              <h2>Shift Triage</h2>
+              <div class="lens-grid">
+                <div>
+                  <strong>Urgent</strong>
+                  <span>Safety, access, leakage, medical, aggressive guest</span>
+                </div>
+                <div>
+                  <strong>Same shift</strong>
+                  <span>Comfort, billing, amenities, loyalty recognition</span>
+                </div>
+                <div>
+                  <strong>Handover</strong>
+                  <span>Pending supplier, guest callback, manager follow-up</span>
+                </div>
+              </div>
+            </section>
+          </aside>
+        </section>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
   </body>
 </html>
